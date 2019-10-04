@@ -5,6 +5,7 @@ public class FloatData : ScriptableObject
 {
     public float value = 1f;
     public float maxValue = 1f;
+
     
     public void UpdateValue(float amount) {
         value += amount;
@@ -32,6 +33,10 @@ public class FloatData : ScriptableObject
             value = maxValue;
         }
         UpdateValueLimitZero(amount);
+    }
+
+    public void UpdateValueToMaxValue() {
+        ChangeValue(maxValue);
     }
 
     public void LogMessage(string message) {
