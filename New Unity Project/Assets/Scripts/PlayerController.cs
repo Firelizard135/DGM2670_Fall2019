@@ -1,39 +1,72 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    CharacterController characterController;
 
-    public float speed = 6.0f;
-    public float jumpSpeed = 8.0f;
-    public float gravity = 20.0f;
+    // Player Movement Variables
+    public float moveSpeed;
+    private float xdirection;
+    private float zdirection;
+    public float horizontalDrag;
 
-    private Vector3 moveDirection = Vector3.zero;
+    // Player grounded variables
+    private bool grounded;
+    public Transform groundCheck;
+    public float groundCheckRadius;
+    public LayerMask whatIsGround;
+
+    // Jumping
+    private int jumpsLeft; // how many jumps left
+    public int jumpsMax;
+    public float jumpForce;
+
+    private Rigidbody rb;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
+        //animator.SetBool("isHeavy",false);
+        //rb.mass = lesserMass;
+    }
+
+
+    void FixedUpdate() {
+        // check if grounded
+        grounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, whatIsGround);
+        if(grounded) {
+            // resets jump
+            jumpsLeft = jumpsMax;
+        }
+
+        //rb.velocity.x = rb.velocity.x*(1-horizontalDrag);
+        rb.velocity = new Vector3(rb.velocity.x*(1-horizontalDrag), rb.velocity.y, rb.velocity.z*(1-horizontalDrag));
     }
 
     void Update()
     {
-        if (characterController.isGrounded)
-        {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
-            moveDirection *= speed;
+        // Movement
+        xdirection = Input.GetAxis("Horizontal")*moveSpeed;
+        zdirection = Input.GetAxis("Vertical")*moveSpeed;
+        //rb.velocity = new Vector2(direction*moveSpeed/rb.mass, rb.velocity.y);
+        rb.AddForce(xdirection, 0.0f, zdirection);
 
-            if (Input.GetButtonDown("Jump"))
-            {
-                moveDirection.y = jumpSpeed;
+
+        // Variable Height Jump
+        if(Input.GetButtonDown("Jump") && jumpsLeft>0) {
+            Jump();
+        }
+        if(Input.GetButtonUp("Jump")) {
+            jumpsLeft -= 1;
+            if(rb.velocity.y > 0){
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             }
         }
 
-        moveDirection.y -= gravity * Time.deltaTime;
+        void Jump() {
+            rb.AddForce(0.0f, jumpForce*10, 0.0f);
+        }
 
-        // Move the controller
-        characterController.Move(moveDirection * Time.deltaTime);
     }
-
-
 }
