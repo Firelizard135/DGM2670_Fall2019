@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3354519366333143312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.08}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2338626069874323153}
@@ -146,6 +146,8 @@ MonoBehaviour:
     m_Bits: 33554432
   jumpsMax: 2
   jumpForce: 35
+  jumpParticle: {fileID: 2196800757908348023, guid: 1c1eade22bac6b94a9206d4e93e6d024,
+    type: 3}
 --- !u!1 &6570914898023293551
 GameObject:
   m_ObjectHideFlags: 0

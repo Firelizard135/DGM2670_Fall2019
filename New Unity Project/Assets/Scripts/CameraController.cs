@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject targObj;
+    public int cameraLag;
 
     private float yOffset;
     private float zOffset;
@@ -23,6 +24,6 @@ public class CameraController : MonoBehaviour
         cameraPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         targPos = new Vector3(targObj.transform.position.x, targObj.transform.position.y+yOffset, targObj.transform.position.z-zOffset);
 
-        transform.Translate( targPos-cameraPos );
+        transform.Translate( (targPos-cameraPos)/cameraLag );
     }
 }

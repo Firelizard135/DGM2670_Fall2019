@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targObj: {fileID: 0}
+  cameraLag: 5
 --- !u!81 &229758171539575393
 AudioListener:
   m_ObjectHideFlags: 0

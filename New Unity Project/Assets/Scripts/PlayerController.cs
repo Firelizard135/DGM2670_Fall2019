@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
 
     private Rigidbody rb;
+    public GameObject jumpParticle;
 
     void Start()
     {
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour
 
         // Variable Height Jump
         if(Input.GetButtonDown("Jump") && jumpsLeft>0) {
+            Instantiate(jumpParticle, rb.transform.position, Quaternion.identity);
             Jump();
         }
         if(Input.GetButtonUp("Jump")) {

@@ -42,4 +42,8 @@ public class FloatData : ScriptableObject
     public void LogMessage(string message) {
         Debug.Log(message);
     }
+
+    // public void CreateParticle(GameObject particle) {
+    //     Instantiate(jumpParticle, Quaternion.identity, Quaternion.identity);
+    // }
 }
