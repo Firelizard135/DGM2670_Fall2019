@@ -139,15 +139,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 100
   horizontalDrag: 0.5
-  groundCheck: {fileID: 2338626069874323153}
-  groundCheckRadius: 0.24
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 33554432
   jumpsMax: 2
   jumpForce: 35
   jumpParticle: {fileID: 2196800757908348023, guid: 1c1eade22bac6b94a9206d4e93e6d024,
     type: 3}
+  isGrounded: {fileID: 11400000, guid: d7c0214c9bf9dc64c99d2660b9e26ae7, type: 2}
+  jumpData: {fileID: 11400000, guid: a9c3b1e891ac9ea4faf8ceac2a2b98cb, type: 2}
 --- !u!1 &6570914898023293551
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +154,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2338626069874323153}
-  m_Layer: 12
+  - component: {fileID: 2812245054770337798}
+  - component: {fileID: 2216365629152987238}
+  m_Layer: 13
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -178,6 +177,74 @@ Transform:
   m_Father: {fileID: 3354519366333143322}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2812245054770337798
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6570914898023293551}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.38
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2216365629152987238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6570914898023293551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd294213a5842384385ab5a896428b5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: d7c0214c9bf9dc64c99d2660b9e26ae7, type: 2}
+        m_MethodName: SetBoolTrue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: a9c3b1e891ac9ea4faf8ceac2a2b98cb, type: 2}
+        m_MethodName: UpdateValueToMaxValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  TriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: d7c0214c9bf9dc64c99d2660b9e26ae7, type: 2}
+        m_MethodName: SetBoolFalse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1001 &5385384352039798882
 PrefabInstance:
   m_ObjectHideFlags: 0

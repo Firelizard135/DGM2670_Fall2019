@@ -11,19 +11,12 @@ public class PlayerController : MonoBehaviour
     private float zdirection;
     public float horizontalDrag;
 
-    // Player grounded variables
-    private bool grounded;
-    public Transform groundCheck;
-    public float groundCheckRadius;
-    public LayerMask whatIsGround;
-
     // Jumping
-    private int jumpsLeft; // how many jumps left
-    public int jumpsMax;
     public float jumpForce;
 
     private Rigidbody rb;
     public GameObject jumpParticle;
+    public FloatData jumpData;
 
     void Start()
     {
@@ -34,13 +27,6 @@ public class PlayerController : MonoBehaviour
 
 
     void FixedUpdate() {
-        // check if grounded
-        grounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, whatIsGround);
-        if(grounded) {
-            // resets jump
-            jumpsLeft = jumpsMax;
-        }
-
         //rb.velocity.x = rb.velocity.x*(1-horizontalDrag);
         rb.velocity = new Vector3(rb.velocity.x*(1-horizontalDrag), rb.velocity.y, rb.velocity.z*(1-horizontalDrag));
     }
@@ -55,13 +41,15 @@ public class PlayerController : MonoBehaviour
 
 
         // Variable Height Jump
-        if(Input.GetButtonDown("Jump") && jumpsLeft>0) {
+        if(Input.GetButtonDown("Jump") && jumpData.value>0) {
             Instantiate(jumpParticle, rb.transform.position, Quaternion.identity);
             Jump();
         }
+
         if(Input.GetButtonUp("Jump")) {
-            jumpsLeft -= 1;
-            if(rb.velocity.y > 0){
+            jumpData.value--;
+
+            if(rb.velocity.y > 0) { //cut upwards momentum on button release
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             }
         }
