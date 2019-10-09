@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private Rigidbody rb;
 
     // Player Movement Variables
     public float moveSpeed;
@@ -12,11 +13,9 @@ public class PlayerController : MonoBehaviour
     public float horizontalDrag;
 
     // Jumping
-    public float jumpForce;
-
-    private Rigidbody rb;
-    public GameObject jumpParticle;
     public FloatData jumpData;
+    public float jumpForce;
+    public GameObject jumpParticle;
 
     void Start()
     {
@@ -29,6 +28,11 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate() {
         //rb.velocity.x = rb.velocity.x*(1-horizontalDrag);
         rb.velocity = new Vector3(rb.velocity.x*(1-horizontalDrag), rb.velocity.y, rb.velocity.z*(1-horizontalDrag));
+
+        //Face Direction
+        if ( Mathf.Abs(xdirection+zdirection) > 0.1f) {
+            rb.rotation = Quaternion.LookRotation( new Vector3(xdirection, 0, zdirection), Vector3.up);
+        }
     }
 
     void Update()
@@ -38,8 +42,7 @@ public class PlayerController : MonoBehaviour
         zdirection = Input.GetAxis("Vertical")*moveSpeed;
         //rb.velocity = new Vector2(direction*moveSpeed/rb.mass, rb.velocity.y);
         rb.AddForce(xdirection, 0.0f, zdirection);
-
-
+        
         // Variable Height Jump
         if(Input.GetButtonDown("Jump") && jumpData.value>0) {
             Instantiate(jumpParticle, rb.transform.position, Quaternion.identity);
@@ -53,10 +56,9 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             }
         }
+    }
 
-        void Jump() {
-            rb.AddForce(0.0f, jumpForce*10, 0.0f);
-        }
-
+    void Jump() {
+        rb.AddForce(0.0f, jumpForce*10, 0.0f);
     }
 }
