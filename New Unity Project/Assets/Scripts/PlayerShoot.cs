@@ -7,6 +7,7 @@ public class PlayerShoot : MonoBehaviour
     private Rigidbody rb;
     public Vector3Data playerDirection;
 
+    public GameObject projectile;
     public GameObject sparksParticle;
     public FloatData shotCharge;
     public float shotChargeSpeed;
@@ -24,13 +25,11 @@ public class PlayerShoot : MonoBehaviour
         }
         if(Input.GetButtonUp("Fire1")) {
             Shoot();
-            shotCharge.value = 0;
         }
     }
 
     void Shoot() {
-        Debug.Log("shoot");
-        //Instantiate(projectile, rb.transform.position, rb.transform.rotation);
+        Instantiate(projectile, rb.transform.position, rb.transform.rotation);
         Instantiate(sparksParticle, rb.transform.position, rb.transform.rotation);
         //recoil
         rb.AddForce(-playerDirection.value.normalized*300*shotCharge.value);
