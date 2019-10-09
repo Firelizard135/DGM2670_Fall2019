@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f20f7d3bc096c47a6add15bd22c213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerDirection: {fileID: 11400000, guid: e9108368237ca11468c6d41b9fec6628, type: 2}
   moveSpeed: 100
   horizontalDrag: 0.5
   jumpData: {fileID: 11400000, guid: a9c3b1e891ac9ea4faf8ceac2a2b98cb, type: 2}
@@ -151,13 +152,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3354519366333143312}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cb7f1dde36aec44abfcfa0d2033f759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xdirection: {fileID: 11400000, guid: cd251e53afbf3504b98c26e706e0fc6c, type: 2}
-  zdirection: {fileID: 11400000, guid: db0ae2c87e6351f498199a4ab0ce5f1d, type: 2}
+  playerDirection: {fileID: 11400000, guid: e9108368237ca11468c6d41b9fec6628, type: 2}
   sparksParticle: {fileID: 7771220810954170613, guid: 673566a4c758c8d4a87cd8634bfbb5fc,
     type: 3}
   shotCharge: {fileID: 11400000, guid: e25b74967bd1db74c823d27337a795df, type: 2}

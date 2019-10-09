@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
+    public Vector3Data playerDirection;
 
     // Player Movement Variables
     public float moveSpeed;
@@ -31,7 +32,8 @@ public class PlayerController : MonoBehaviour
 
         //Face Direction
         if ( Mathf.Abs(xdirection+zdirection) > 0.1f) {
-            rb.rotation = Quaternion.LookRotation( new Vector3(xdirection, 0, zdirection), Vector3.up);
+            playerDirection.value = new Vector3(xdirection, 0, zdirection);
+            rb.rotation = Quaternion.LookRotation( playerDirection.value, Vector3.up);
         }
     }
 

@@ -5,8 +5,7 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     private Rigidbody rb;
-    public FloatData xdirection;
-    public FloatData zdirection;
+    public Vector3Data playerDirection;
 
     public GameObject sparksParticle;
     public FloatData shotCharge;
@@ -21,8 +20,7 @@ public class PlayerShoot : MonoBehaviour
     {
         //Shoot
         if(Input.GetButton("Fire1") && shotCharge.value<shotCharge.maxValue) {
-            //shotCharge.value += shotChargeSpeed;
-            shotCharge.value = shotCharge.maxValue;
+            shotCharge.value += shotChargeSpeed;
         }
         if(Input.GetButtonUp("Fire1")) {
             Shoot();
@@ -33,8 +31,8 @@ public class PlayerShoot : MonoBehaviour
     void Shoot() {
         Debug.Log("shoot");
         //Instantiate(projectile, rb.transform.position, rb.transform.rotation);
-        //Instantiate(sparksParticle, rb.transform.position, rb.transform.rotation);
+        Instantiate(sparksParticle, rb.transform.position, rb.transform.rotation);
         //recoil
-        rb.AddForce(-rb.rotation.x*300*shotCharge.value, 0.0f, -rb.rotation.z*300*shotCharge.value);
+        rb.AddForce(-playerDirection.value.normalized*300*shotCharge.value);
     }
 }
